@@ -1,5 +1,8 @@
 from flask import Flask, url_for, render_template
+from flask_sqlalchemy import SQLAlchemy
+
 app = Flask(__name__)
+dp = SQLAlchemy(app)
 
 @app.route('/hello')
 def hello():
@@ -37,3 +40,15 @@ def index():
     return render_template('index.html', name=name, movies=movies)
 
 
+import os
+import sys
+
+WIN = sys.platform.startswith('win')
+# if WIN:
+#     prefix = 'sqlite:///'
+# else:
+#     prefix = 'sqlite:////'
+prefix = 'sqlite:///'
+app.config['SQLALCHEMY_DATABASE_URI'] = prefix + os.path.join(app.root_path, 'data.db')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
