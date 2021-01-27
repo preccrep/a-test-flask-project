@@ -3,6 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>{{ name }}'s Watchlist</title>
+	<link rel="icon" href="{{ url_for('static', filename='favicon.png') }}">
 </head>
 <body>
 	<h2>{{ name }}'s Watchlist</h2>
@@ -12,6 +13,7 @@
 		{% for movie in movies %}  {# 迭代movies变量 #}
 		<li>{{ movie.title }} - {{ movie.year }}</li>  {# 等同于movie['title'] #}
 		{% endfor %}  {# 使用endfor标签结束for语句 #}
+		<img src="{{ url_for('static', filename='room.jpg') }}">
 	</ul>
 	<footer>
 		<small>&copy; 2021 <a href="preccrep.com">Flask Runoob</a></small>
