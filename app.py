@@ -52,3 +52,28 @@ prefix = 'sqlite:///'
 app.config['SQLALCHEMY_DATABASE_URI'] = prefix + os.path.join(app.root_path, 'data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(20))
+
+class Movie(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(60))
+    year = db.Column(db.String(4))
+
+import click
+
+@app.cli.command()
+@click.option('--drop', is_flag=True, help='Create after drop.')
+def initdb(drop):
+    """
+    initialize the database
+    :param drop: the input option
+    :return: a prompting message
+    """
+    if drop:
+        db.drop_all()
+    db.create_all()
+    click.echo('Initialize the database.')
+
