@@ -135,3 +135,5 @@ dmypy.json
 
 /flask_key
 /flask_key.pub
+
+*.db
